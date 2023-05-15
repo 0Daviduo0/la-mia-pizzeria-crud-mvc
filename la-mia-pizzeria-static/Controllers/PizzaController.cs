@@ -1,4 +1,5 @@
 ﻿using la_mia_pizzeria_static.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,7 @@ namespace la_mia_pizzeria_static.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Create()
         {
             using (PizzaContext db = new PizzaContext())
@@ -73,6 +75,7 @@ namespace la_mia_pizzeria_static.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Create(PizzaFormModel data)
         {
             if (!ModelState.IsValid)
@@ -126,6 +129,7 @@ namespace la_mia_pizzeria_static.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Update(long id)
         {
             using (PizzaContext db = new PizzaContext())
@@ -164,6 +168,7 @@ namespace la_mia_pizzeria_static.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Update(long id, PizzaFormModel data)
         {
             if (!ModelState.IsValid)
@@ -205,6 +210,7 @@ namespace la_mia_pizzeria_static.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Delete(long id)
         {
             using (PizzaContext db = new PizzaContext())
